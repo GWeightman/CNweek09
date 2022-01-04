@@ -9,3 +9,14 @@ exports.addMovie = async (req, res) => {
         res.status(500).send({ message: "check server logs" })
     }
 };
+
+exports.deleteMovie = async (req, res) => {
+    try {
+        const mov_entry = await Movie.deleteOne(req.body)
+        res.status(200).send({ message: "Successfully deleted", mov_entry })
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ message: "check server logs" })
+    }
+}
+
