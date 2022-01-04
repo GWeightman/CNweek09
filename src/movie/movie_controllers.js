@@ -40,3 +40,19 @@ exports.editMovie = async (req, res) => {
         res.status(500).send({ message: "check server logs" })
     }
 }
+
+exports.listMovie = async (req, res) => {
+    try{
+        const fulllist = req.body
+        if (fulllist.show == "full list") {
+            const list = []
+            const listmovie = await Movie.find()
+            listmovie.forEach((element) => {
+                list.push({ Title: element.title, Actor: element.actor })
+            })
+            res.status(200).send({ list })
+        }
+    } catch (error) {
+        console.log (error)
+    }
+}
